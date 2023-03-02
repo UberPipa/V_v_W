@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{% static 'main/css/bootstrap.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/dashboard.css'%}">
 
+    <link rel="stylesheet" href="{% static 'main/css/daterangepicker.css'%}">
+
   </head>
   <body>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -92,15 +94,30 @@
 
       {% endblock %}
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
 
     </main>
   </div>
 </div>
-
+     <script src="{% static 'main/js/jquery.js'%}"></script>
      <script src="{% static 'main/js/bootstrap.bundle.js'%}"></script>
      <script src="{% static 'main/js/feather.min.js'%}"></script>
-     <script src="{% static 'main/js/Chart.min.js'%}"></script>
-     <script src="{% static 'main/js/feather.min.js'%}"></script>
+     <script src="{% static 'main/js/dashboard.js'%}"></script>
+
+     <script src="{% static 'main/js/moment.min.js'%}"></script>
+     <script src="{% static 'main/js/daterangepicker.js'%}"></script>
+
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
+
+
+
   </body>
 </html>
