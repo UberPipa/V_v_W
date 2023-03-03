@@ -19,13 +19,38 @@
         </div>
       </div>
 
+<main class="container">
+  <div class="my-2 p-4 rounded shadow" style="background-color: #FFFFFF;">
+    <form method="post" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <div class="input-group mb-3">
+        <input type="text" name="daterange" class="form-control" placeholder="Выберите дату" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="submit" id="button-addon2">Button</button>
+      </div>
+    </form>
+  </div>
+</main>
 
-<input type="text" name="daterange"/>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields - Скрипт для формы отправки, слушает отправку формы
+(() => {
+  'use strict'
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
 
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
 
-
-
-
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
 
 {% endblock %}
