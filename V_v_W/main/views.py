@@ -18,4 +18,4 @@ def reports(request):
     return render(request, 'main/reports.html', {'daterange': daterange})
 
 
-
+print(act_data)
