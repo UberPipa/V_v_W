@@ -1,13 +1,13 @@
 #from datetime import *
 import datetime
-from V_v_W.main.views import act_data
+from django.core.cache import cache
 
 
 def date_check():
     # Вводим начальную дату
     #inputDate = input('Введите дату от которой будут проверяться трамваи в формате YYYY-MM-DD: ')
-    inputDate = act_data
-    print(inputDate)
+    inputDate = '2023-01-01'
+
     formate = "%Y-%m-%d" # Проверяем формат даты
     res = True
     try:
@@ -26,3 +26,4 @@ def date_check():
     data_start = str(data_start.strftime('%Y-%m-%d')) # В строку
     data_end = str(data_end.strftime('%Y-%m-%d')) # В строку
     return str(inputDate), data_start, data_end
+

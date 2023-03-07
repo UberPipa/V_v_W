@@ -179,15 +179,11 @@ def work():
 
 
 
-    def create_txt():
-        with open(f'output_data/{current_date} - Отчёт по трамваям.txt', mode="w") as f:
-            sys.stdout = f
-            print('️Статистика по трамваям Витязь ().')
-            sys.stdout = original_stdout
-
-
-
-
+    # def create_txt():
+    #     with open(f'output_data/{current_date} - Отчёт по трамваям.txt', mode="w") as f:
+    #         sys.stdout = f
+    #         print('️Статистика по трамваям Витязь ().')
+    #         sys.stdout = original_stdout
 
     # def choice_report():
     #     print('Какой требуется отчёт?')
