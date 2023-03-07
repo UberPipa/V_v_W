@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.core.cache import cache
+
+from .models import act_data
 
 
 # Create your views here.
@@ -12,12 +13,10 @@ def about(request):
 def reports(request):
     if request.method == 'POST':
         birthday = request.POST.get('birthday')
+        birthday = act_data(data = birthday)
+        birthday.save()
 
-        print(birthday)
-
-
-
-    return render(request, 'main/reports.html', {'data': birthday})
+    return render(request, 'main/reports.html')
 
 
 
