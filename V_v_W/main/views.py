@@ -7,16 +7,19 @@ from .models import act_data
 def index(request):
     return render(request, 'main/index.html')
 
+
 def about(request):
     return render(request, 'main/about.html')
+
 
 def reports(request):
     if request.method == 'POST':
         birthday = request.POST.get('birthday')
-        birthday = act_data(data = birthday)
-        birthday.save()
 
+        birthday = birthday.split('/')
+        birthday.reverse()
+        birthday = '-'.join(birthday)
+
+        dat = act_data(current_data=birthday, id=0)
+        dat.save()
     return render(request, 'main/reports.html')
-
-
-
