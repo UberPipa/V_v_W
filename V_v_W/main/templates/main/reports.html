@@ -28,8 +28,14 @@
         <button class="btn btn-primary" type="submit" id="button-addon2">Отпрвить дату</button>
       </div>
     </form>
+    <div class="callout">
+        Выбрана дата - {% for el in old_data %} {{ el.current_data }} {% endfor %}
+
+    </div>
   </div>
 </main>
+
+
 
 <script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields - Скрипт для формы отправки, слушает отправку формы
