@@ -1,8 +1,6 @@
 import pandas as pd
 from datetime import date
-
 from openpyxl.utils import get_column_letter
-
 from logic import get_df_full_bad_cam, get_without_remont, get_df_partly_bad_cam, get_df_full_and_partly_bad_cam, \
     get_df_partly_without_geo_cam, get_df_full_without_geo_cam, get_df_full_available_cam, \
     get_df_full_and_partly_without_geo_cam, get_df_full_available_and_partly_bad_cam
@@ -11,8 +9,6 @@ from work_and_print_module import work
 pd.options.mode.chained_assignment = None #Выключает предупреждения
 
 work()
-
-
 
 # inputDate = '2023-02-06'
 # #1, 2 process_input_data

@@ -1,12 +1,16 @@
 #from datetime import *
 import datetime
-from django.core.cache import cache
+
 
 
 def date_check():
     # Вводим начальную дату
     #inputDate = input('Введите дату от которой будут проверяться трамваи в формате YYYY-MM-DD: ')
-    inputDate = '2023-01-01'
+    inputDate = '2023-01-03'
+
+    # birthday = birthday.split('/')
+    # birthday.reverse()
+    # birthday = '-'.join(birthday)
 
     formate = "%Y-%m-%d" # Проверяем формат даты
     res = True

@@ -1,8 +1,6 @@
 from datetime import date
 import sys
-
 import pandas as pd
-
 from logic import get_without_remont, get_df_full_and_partly_bad_cam, get_df_full_bad_cam, get_df_partly_bad_cam, get_df_full_available_and_partly_bad_cam, get_df_full_and_partly_without_geo_cam, get_df_full_without_geo_cam, get_df_partly_without_geo_cam, get_df_full_available_cam
 from process_date import date_check
 from process_input_data import create_df, read_remont
