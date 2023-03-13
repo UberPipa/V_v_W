@@ -30,8 +30,11 @@
     </form>
     <div class="callout">
         Выбрана дата - {% for el in old_data %} {{ el.current_data }} {% endfor %}
-
     </div>
+      <form method="post" class="calculate" novalidate>
+        {% csrf_token %}
+          <button type="submit" class="btn btn-primary mt-3" value="run_function_calculate" name="inDa">Посчитать</button>
+      </form>
   </div>
 </main>
 
@@ -44,6 +47,27 @@
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields - Скрипт для формы отправки, слушает отправку формы
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.calculate')
 
   // Loop over them and prevent submission
   Array.from(forms).forEach(form => {
