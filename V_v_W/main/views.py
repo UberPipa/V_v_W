@@ -17,6 +17,7 @@ def dataTime(request):
     if request.method == 'POST':
         print(request.POST)
         if 'birthday' in request.POST:  # Для получения даты
+            print(request.POST.get('birthday'))
             birthday = request.POST.get('birthday')
             dat = act_data(current_data=birthday, id=0)
             dat.save()
@@ -26,7 +27,6 @@ def dataTime(request):
             inputDate = inputDate.split('/')
             inputDate.reverse()
             inputDate = '-'.join(inputDate)
-            work()
-
+            work(inputDate)
     old_data = act_data.objects.all()
     return render(request, 'main/reports.html', {'old_data': old_data})

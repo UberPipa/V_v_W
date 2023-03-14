@@ -102,29 +102,29 @@ def division_plus_list_plus_num_cam(df, df_for_ls): # Функция прини�
     return df, vl_df_cam, tv_df_cam, df_tram, vl_df_tram, tv_df_tram, count_tram, count_vl_tram, count_tv_tram, list_tram, vl_list_tram, tv_list_tram
 
 
-def date_check():
+def date_check(inputDate):
+
     import datetime
     # Вводим начальную дату
     #inputDate = input('Введите дату от которой будут проверяться трамваи в формате YYYY-MM-DD: ')
-    inputDate = '2023-01-03'
+    #inputDate = '2023-01-03'
 
-    # birthday = birthday.split('/')
-    # birthday.reverse()
-    # birthday = '-'.join(birthday)
+    # formate = "%Y-%m-%d" # Проверяем формат даты
+    # res = True
+    # try:
+    #     res = bool(datetime.datetime.strptime(inputDate, formate))
+    # except ValueError:
+    #     res = False
+    # # Выдаём результат
+    # if res == True:
+    #     #print("Дата выбрана! Вы выбрали - " + inputDate)
+    #     start_date = inputDate
+    # else:
+    #     print("Введена не корректная дата!")
+    #     date_check(inputDate)
 
-    formate = "%Y-%m-%d" # Проверяем формат даты
-    res = True
-    try:
-        res = bool(datetime.datetime.strptime(inputDate, formate))
-    except ValueError:
-        res = False
-    # Выдаём результат
-    if res == True:
-        #print("Дата выбрана! Вы выбрали - " + inputDate)
-        start_date = inputDate
-    else:
-        print("Введена не корректная дата!")
-        date_check()
+
+
     data_start = datetime.datetime.strptime(inputDate, '%Y-%m-%d') # из строки в дату
     data_end = data_start + datetime.timedelta(days=6) # Прибавляем 6 дней
     data_start = str(data_start.strftime('%Y-%m-%d')) # В строку
@@ -263,9 +263,9 @@ def get_df_full_available_cam(df_full_available_and_partly_bad_cam, df_full_and_
 # 		df_partly_without_geo_cam – Частично без гео данных          #10
 
 
-def work():
+def work(inputDate):
     current_date = datetime.date.today()  # Текущая дата
-    inputDate, data_start, data_end = date_check()
+    inputDate, data_start, data_end = date_check(inputDate)
     #1, 2 process_input_data
     df_cam, vl_df_cam, tv_df_cam, df_tram, vl_df_tram, tv_df_tram, count_tram, count_vl_tram, count_tv_tram, list_tram, vl_list_tram, tv_list_tram = create_df() # Читаем и делаем df, распаковываем
     df_remont_cam, vl_df_remont_cam , tv_df_remont_cam, df_remont_tram, vl_df_remont_tram, tv_df_remont_tram, count_remont_tram, count_vl_remont_tram, count_tv_remont_tram, list_remont_tram, vl_list_remont_tram, tv_list_remont_tram = read_remont(df_cam) # Считывает и хранит ремонтные составы
@@ -288,88 +288,22 @@ def work():
     #11 get_df_full_available_cam
     df_full_available_cam, df_vl_full_available_cam, df_tv_full_available_cam, df_full_available_tram, df_vl_full_available_tram, df_tv_full_available_tram, count_full_available_tram, count_vl_full_available_tram, count_tv_full_available_tram, list_full_available_tram, list_vl_full_available_tram, list_tv_full_available_tram = get_df_full_available_cam(df_full_available_and_partly_bad_cam, df_full_without_geo_cam)
 
-    def crazy_report():
-        print("*" * 150)
-        print(f'‼️Статистика по трамваям Витязь ({data_start} - {data_end}).')
-        print(' ')
-        print(f'🔸Всего заведено в Сферу: {count_tram} шт. : {list_tram}.')
-        print(f'🛠Всего в ремонте: {count_remont_tram} шт. : {list_remont_tram}.')
-        print(f'🔴🟡🟢Все, кроме ремонтных: {count_without_remont_tram} шт. : {list_without_remont_tram}.')
-        print(f'❌Частично и полностью без детекций: {count_full_and_partly_bad_tram} шт. : {list_full_and_partly_bad_tram}.')
-        print(f'****** ❌Не доступны полностью: {count_full_bad_tram} шт. : {list_full_bad_tram}.')
-        print(f'****** ⚠️Не доступны частитчно всего: {count_partly_bad_tram} шт. : {list_partly_bad_tram}.')
-        print(f'✅Все доступные: {count_full_available_and_partly_bad_tram} шт. : {list_full_available_and_partly_bad_tram}.')
-        print(f'⚠️Все без геопозиции: {count_full_and_partly_without_geo_tram} шт. : {list_full_and_partly_without_geo_tram}.')
-        print(f'****** ⚠️Без геопозиции полностью: {count_full_without_geo_tram} шт. : {list_full_without_geo_tram}.')
-        print(f'****** ⚠️Частично без геопозиции : {count_df_partly_without_geo_tram} шт. : {list_df_partly_without_geo_tram}.')
-        print(f'✅Полностью рабочие трамваи: {count_full_available_tram} шт. : {list_full_available_tram}.')
-        print(' ')
-        print('‼️VisionLab')
-        print(f'🔸Всего: {count_vl_tram} шт. : {vl_list_tram}.')
-        print(f'🛠В ремонте: {count_vl_remont_tram} шт. : {vl_list_remont_tram}.')
-        print(f'🔴🟡🟢Все, кроме ремонтных: {count_vl_without_remont_tram} шт. : {vl_list_without_remont_tram}.')
-        print(f'❌Частично и полностью без детекций: {count_vl_full_and_partly_bad_tram} шт. : {list_vl_full_and_partly_bad_tram}.')
-        print(f'****** ❌Не доступны полностью: {count_vl_full_bad_tram} шт. : {list_vl_full_bad_tram}.')
-        print(f'****** ⚠️Не доступны частитчно: {count_vl_partly_bad_tram} шт. : {list_vl_partly_bad_tram}.')
-        print(f'✅Все доступные: {count_vl_full_available_and_partly_bad_tram} шт. : {list_vl_full_available_and_partly_bad_tram}.')
-        print(f'⚠️Без геопозиции: {vl_count_full_and_partly_without_geo_tram} шт. : {vl_list_full_and_partly_without_geo_tram}.')
-        print(f'****** ⚠️Без геопозиции полностью: {count_vl_full_without_geo_tram} шт. : {list_vl_full_without_geo_tram}.')
-        print(f'****** ⚠️Частично без геопозиции : {count_vl_df_partly_without_geo_tram} шт. : {list_vl_df_partly_without_geo_tram}.')
-        print(f'✅Полностью рабочие трамваи: {count_vl_full_available_tram} шт. : {list_vl_full_available_tram}.')
-        print(' ')
-        print('‼️Tevian')
-        print(f'🔸Всего: {count_tv_tram} шт. : {tv_list_tram}.')
-        print(f'🛠В ремонте: {count_tv_remont_tram} шт. : {tv_list_remont_tram}.')
-        print(f'🔴🟡🟢Все, кроме ремонтных: {count_tv_without_remont_tram} шт. : {tv_list_without_remont_tram}.')
-        print(f'❌Частично и полностью без детекций: {count_tv_full_and_partly_bad_tram} шт. : {list_tv_full_and_partly_bad_tram}.')
-        print(f'****** ❌Не доступны: {count_tv_full_bad_tram} шт. : {list_tv_full_bad_tram}.')
-        print(f'****** ⚠️Не доступны частитчно: {count_tv_partly_bad_tram} шт. : {list_tv_partly_bad_tram}.')
-        print(f'✅Все доступные: {count_tv_full_available_and_partly_bad_tram} шт. : {list_tv_full_available_and_partly_bad_tram}.')
-        print(f'⚠️Без геопозиции: {tv_count_full_and_partly_without_geo_tram} шт. : {tv_list_full_and_partly_without_geo_tram}.')
-        print(f'****** ⚠️Без геопозиции полностью: {count_tv_full_without_geo_tram} шт. : {list_tv_full_without_geo_tram}.')
-        print(f'****** ⚠️Частично без геопозиции : {count_tv_df_partly_without_geo_tram} шт. : {list_tv_df_partly_without_geo_tram}.')
-        print(f'✅Полностью рабочие трамваи: {count_tv_full_available_tram} шт. : {list_tv_full_available_tram}.')
-        print("*" * 150)
-
-    def old_report():
-        print("*" * 150)
-        print(f'‼️Статистика по трамваям Витязь ({data_start} - {data_end}).')
-        print(' ')
-        print(f'🔸Всего заведено в Сферу: {count_tram} шт.')
-        print(f'🛠Всего в ремонте: {count_remont_tram} шт.')
-        print(f'❌Частично или полностью без детекций: {count_full_and_partly_bad_tram} шт.')
-        print(f'✅Полностью рабочие трамваи: {count_full_available_tram} шт.')
-        print(' ')
-        print('‼️VisionLab')
-        print(f'🔸Всего: {count_vl_tram} шт.')
-        print(f'🛠В ремонте: {count_vl_remont_tram} шт.')
-        print(f'❌Не доступны: {count_vl_full_bad_tram} шт. : {list_vl_full_bad_tram}.')
-        print(f'✅Доступны: {count_vl_full_available_and_partly_bad_tram} шт. - из них:')
-        print(f'⠀⠀⠀⚠️Детекции свежие не со всех камер: {count_vl_partly_bad_tram} шт. : {list_vl_partly_bad_tram}.')
-        if count_vl_full_without_geo_tram == 0:
-            pass
-        else:
-            print(f'⠀⠀⠀⚠️Нет геопозиции: {count_vl_full_without_geo_tram} шт. : {list_vl_full_without_geo_tram}.')
-        print(f'⠀⠀⠀✅Полностью рабочие трамваи: {count_vl_full_available_tram} шт.')
-        print(' ')
-        print('‼️Tevian')
-        print(f'🔸Всего: {count_tv_tram} шт.')
-        print(f'🛠В ремонте: {count_tv_remont_tram} шт.')
-        print(f'❌Не доступны: {count_tv_full_bad_tram} шт. : {list_tv_full_bad_tram}.')
-        print(f'✅Доступны: {count_tv_full_available_and_partly_bad_tram} шт. : - из них:')
-        print(f'⠀⠀⠀⚠️Детекции свежие не со всех камер: {count_tv_partly_bad_tram} шт. : {list_tv_partly_bad_tram}.')
-        if count_tv_full_without_geo_tram == 0:
-            pass
-        else:
-            print(f'⠀⠀⠀⚠️Нет геопозиции: {count_tv_full_without_geo_tram} шт. : {list_tv_full_without_geo_tram}.')
-        print(f'⠀⠀⠀✅Полностью рабочие трамваи: {count_tv_full_available_tram} шт.')
-        print("*" * 150)
-
     def opty_report():
+
+        # l = [
+        #     f'‼️Статистика по трамваям Витязь ({data_start} - {data_end}).',
+        #     ' ',
+        #     f'🔸Всего заведено в Сферу: {count_tram} шт.',
+        #     f'🛠Находятся в ремонте: {count_remont_tram} шт.',
+        #     ]
+        # cwd = os.getcwd() + '\\main\\VIT'
+        #
+        # with open(f'{cwd}\\output_data\\example.txt', 'w', encoding="utf-8") as p:
+        #     p.write('\n'.join(l))
+
         cwd = os.getcwd() + '\\main\\VIT'
         file_path = f'{cwd}\\output_data\\{current_date} - Отчёт по трамваям.txt' # Запись в файл в 2 страки
         sys.stdout = open(file_path, "w", encoding='utf-8') # Запись в файл в 2 страки
-
         print(f'‼️Статистика по трамваям Витязь ({data_start} - {data_end}).')
         print(' ')
         print(f'🔸Всего заведено в Сферу: {count_tram} шт.')
@@ -435,7 +369,7 @@ def work():
     create_excel()
 print('Готово')
 
-work()
+
 
 
 
