@@ -19,3 +19,5 @@
 ⚠️Трамваи, где не доступна часть камер : 9 шт. : 30609(3), 31068(1,6), 31069(4,5), 31086(4,5,6), 31100(2,3,5,6), 31102(3,4,5,6), 31110(2,3,4,5,6), 31125(1,4,6), 31130(6).
 ⚠️Трамваи без геоданных: 4 шт. : 31097, 31104, 31266, 31274.
 ✅Полностью рабочие ️трамваи: 161 шт.
+<QueryDict: {'csrfmiddlewaretoken': ['oR95AOwcqq08iyQoifHoOAIkmWtlnQEBpRKFJwlkINlo2hFA66XqiQJ20lqe7mI3'], 'birthday': ['03/14/2023']}>
+<QueryDict: {'csrfmiddlewaretoken': ['VTEhO7ndlLqqA8PgVPjpWf7RNLLtF7dkWTfRXPclD8LGkREsJGzrqv8zraImpDhM'], 'inDa': ['run_function_calculate']}>

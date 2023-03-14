@@ -1,5 +1,5 @@
+import os
 import sys
-
 import pandas as pd
 import numpy as np
 import datetime
@@ -133,7 +133,8 @@ def date_check():
 
 
 def create_df():  #1 читает из CVS, создаёт df и форматирует его
-    name_df = read_csv("input_data/input_cam.txt") # Читаем
+    cwd = os.getcwd() + '\\main\\VIT'
+    name_df = read_csv(f"{cwd}\\input_data\\input_cam.txt") # Читаем
     df = pd.DataFrame(name_df) # Помещаем в переменную
     df.drop(df[df['status'] == '-'].index, inplace=True) # Удаляет архивные
     df.pop('status')  # удаляет не нужный столбец
@@ -160,7 +161,8 @@ def create_df():  #1 читает из CVS, создаёт df и формати�
     return df_cam, vl_df_cam, tv_df_cam, df_tram, vl_df_tram, tv_df_tram, count_tram, count_vl_tram, count_tv_tram, list_tram, vl_list_tram, tv_list_tram
 
 def read_remont(df_cam): #2 Читает и возвращает список ремонтных составов с вендорами
-    list_remont_cam = read_csv("input_data/remont.txt", names=['N_sostava'], header=None) # Читаем
+    cwd = os.getcwd() + '\\main\\VIT'
+    list_remont_cam = read_csv(f"{cwd}\\input_data\\remont.txt", names=['N_sostava'], header=None) # Читаем
     df_remont_cam = pd.DataFrame(list_remont_cam) # Создаём
     df_remont_cam = df_cam[(df_cam['N_sostava'].isin(df_remont_cam['N_sostava'])) == True] # оставляем только ремнтники
     df_remont_cam['status'] = 'Трамвай в ремонте' # Служебный для Excel
@@ -364,7 +366,8 @@ def work():
         print("*" * 150)
 
     def opty_report():
-        file_path = f'output_data/{current_date} - Отчёт по трамваям.txt' # Запись в файл в 2 страки
+        cwd = os.getcwd() + '\\main\\VIT'
+        file_path = f'{cwd}\\output_data\\{current_date} - Отчёт по трамваям.txt' # Запись в файл в 2 страки
         sys.stdout = open(file_path, "w", encoding='utf-8') # Запись в файл в 2 страки
 
         print(f'‼️Статистика по трамваям Витязь ({data_start} - {data_end}).')
@@ -417,7 +420,8 @@ def work():
         result_tram = result_tram.sort_values(by=['N_sostava'])  # Сортировка
         result_tram = result_tram[['N_sostava', 'vendor', 'status', 'SYS_last_time_check_on_camera', 'dont_work_geo_on_cam','SYS_last_lat_on_camera', 'SYS_last_lon_on_camera', 'сount_cam', 'work_сount_cam']]
         result_tram.rename(columns={'N_sostava': '№ трамвая', 'vendor': 'Вендор', 'status': 'Статус трамвая','SYS_last_time_check_on_camera': 'Последняя детекция трамвая', 'dont_work_geo_on_cam': 'Cтатус геопозиции', 'SYS_last_lat_on_camera': 'Широта','SYS_last_lon_on_camera': 'Долгота', 'сount_cam': 'Камер на трамвае','work_сount_cam': 'Камер работают'}, inplace=True)  # Переименования для excel
-        with pd.ExcelWriter(f'output_data/{current_date} - Статистика по трамваям.xlsx') as writer:
+        cwd = os.getcwd() + '\\main\\VIT'
+        with pd.ExcelWriter(f'{cwd}\\output_data\\{current_date} - Статистика по трамваям.xlsx') as writer:
             result_tram.to_excel(writer, sheet_name="Статистика по трамваям", index=False)  # Записываем
             #workbook = writer.book  # Определяем док
             worksheet = writer.sheets['Статистика по трамваям']  # Находим лист
@@ -429,6 +433,7 @@ def work():
                 writer.sheets[i].autofit()
     opty_report()
     create_excel()
+print('Готово')
 
 work()
 
